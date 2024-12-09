@@ -1,0 +1,132 @@
+<div>
+
+<ul>
+<li><a href="/users"> All users </a> </li>
+<li><a href="/photos"> All public photos </a> </li>
+
+  <% if current_user.present? %>
+    <li><a href="/users/edit">Edit profile</a></li>
+    <li><a href="/users/sign_out">Sign out</a></li>
+ 
+  <% else %>
+    <li><a href="/users/sign_up">Sign up</a></li>
+    <li><a href="/users/sign_in">Sign in</a></li>
+  <% end %>
+</ul>
+
+</div>
+
+
+    <h1>
+      Photo Details
+    </h1>
+
+    
+    <dl>
+      
+
+      <dt>
+        Image
+      </dt>
+      <dd>
+          <img src="<%= @the_photo.image %>">
+      </dd>
+
+      <dt>
+        Caption
+      </dt>
+      <dd>
+        <%= @the_photo.caption %>
+      </dd>
+
+    <dt>
+        Owner
+      </dt>
+      <dd>
+        <%= @the_photo.owner.username %>
+      </dd>
+
+      <dt>
+        Posted
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_photo.created_at) %> ago
+      </dd>
+
+
+      <dt>
+        Likes count
+      </dt>
+      <dd>
+        <%= @the_photo.likes_count %>
+      </dd>
+
+
+      <dt>
+        Comments count
+      </dt>
+      <dd>
+        <%= @the_photo.comments_count %>
+      </dd>
+
+      <dt>
+        Fans
+      </dt>
+      <dd>
+      </dd>
+
+      <dt>
+        Add a fan
+      </dt>
+      <dd>
+      <button> Like </button>
+      </dd>
+
+
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+
+  <div>
+    <h2>
+      Edit photo
+    </h2>
+   </div> 
+
+<div>
+  <div>
+   <table> 
+
+  <tr>
+  <th> Commenter </th>
+  <th> Comment </th>
+  <th> Posted </th>
+  </tr> 
+
+  <% @list_of_comments.each do |a_comment| %>
+      <tr>
+        <td>
+          <%= a_comment.author.username %>
+        </td>
+
+        <td>
+          <%= a_comment.body %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_comment.created_at) %>
+        </td>
+       </tr> 
+
+      <%end%> 
+ </table>
+ </div>
+</div>
+  
+ 
+
+    

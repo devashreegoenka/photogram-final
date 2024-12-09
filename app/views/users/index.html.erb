@@ -1,0 +1,61 @@
+<div>
+
+<ul>
+<li><a href="/users"> All users </a> </li>
+<li><a href="/photos"> All public photos </a> </li>
+
+  <% if current_user.present? %>
+    <li><a href="/users/edit">Edit profile</a></li>
+    <li><a href="/users/sign_out">Sign out</a></li>
+  <% else %>
+    <li><a href="/users/sign_up">Sign up</a></li>
+    <li><a href="/users/sign_in">Sign in</a></li>
+  <% end %>
+</ul>
+
+
+</div>
+
+ <div>
+    <h1>
+      List of users
+    </h1>
+  </div>
+
+<table border="1">
+
+<tr>
+  <th> Username </th>
+  <th> Private? </th>
+  <th> </th>
+  <th> </th>
+</tr>
+
+<% @list_of_users.each do |a_user| %>
+      <tr>
+        <td>
+          <%= a_user.username %>
+        </td>
+
+        <td>
+          <%= a_user.private %>
+        </td>
+
+        <td>
+         <% if current_user.present? %>
+          <form action="/insert_follow_request" method="post">
+              <input type="hidden" name="query_recipient_id">
+
+              <button>
+                Follow
+              </button>
+            </form>
+         <%end%>
+         </td>
+
+        <td>
+          <a href="users/<%=a_user.username%>"> Details </a>
+        </td>
+  <% end %>
+
+</table>
